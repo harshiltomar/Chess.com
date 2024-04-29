@@ -1,6 +1,17 @@
-interface Game {
-  id: number;
-  name: string;
-  player1: WebSocket[];
-  player2: WebSocket[];
+import { WebSocket } from "ws";
+
+export class Game {
+  private player1: WebSocket;
+  private player2: WebSocket;
+  private board: string;
+  private moves: string[];
+  private startTime: Date;
+
+  constructor(player1: WebSocket, player2: WebSocket) {
+    this.player1 = player1;
+    this.player2 = player2;
+    this.board = "chess";
+    this.moves = [];
+    this.startTime = new Date();
+  }
 }
