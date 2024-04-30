@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 
+// TODO: build a what is your skill level alert dialog with New, Beginer, Intermediate, Advanced
 export const Landing = () => {
   return (
-    <div className="flex flex-col mx-28 justify-center">
+    <div className="flex flex-col mx-28 justify-center mt-20">
       {/* Secrion 1 */}
-      <div className="mt-2">
+      <div className="mx-4">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="flex justify-center">
             <img
@@ -39,7 +40,7 @@ export const Landing = () => {
       </div>
 
       {/* Secrion 2 */}
-      <div className="mt-6 bg-slate-300 mx-4 rounded-lg p-4">
+      <div className="mt-10 bg-slate-300 mx-4 rounded-lg p-4">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="flex flex-col items-end">
             <h1 className="text-4xl my-2">Solve Chess Puzzles</h1>
@@ -48,10 +49,15 @@ export const Landing = () => {
                 Solve Puzzles &rarr;
               </button>
             </Link>
-            <div className="font-thin mt-4 mr-8 text-right">
+            <div className=" font-thin mt-4 text-right">
               "Puzzles are the best way to improve pattern recognition and
-              Chess.com does it best !"
-              <p className="font-medium italic">-Shlok Sinha</p>
+              Problem Solving Skills.
+              <span className="font-medium italic text-blue-700">
+                {" "}
+                Chess Nation{" "}
+              </span>
+              does it best !"
+              <p className="font-medium italic">- Shlok Sinha</p>
             </div>
           </div>
           <div className="flex justify-center">
