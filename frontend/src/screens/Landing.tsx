@@ -57,7 +57,7 @@ export const Landing = () => {
                 Chess Nation{" "}
               </span>
               does it best !"
-              <p className="font-medium italic">- Shlok Sinha</p>
+              <p className="font-medium italic">- Gukeesh D</p>
             </div>
           </div>
           <div className="flex justify-center">

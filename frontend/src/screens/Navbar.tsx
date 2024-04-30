@@ -4,7 +4,7 @@ export const Navbar = () => {
       <div className="font-bold text-2xl">
         CHESS<span className="font-thin text-lg">Nation</span>
       </div>
-      <div className="flex space-x-6 mr-6 font-thin">
+      <div className=" mt-2 flex space-x-6 mr-6 font-thin">
         <h1>Puzzles</h1>
         <h1>Spectate</h1>
         <div>LOGOUT</div>
