@@ -40,10 +40,12 @@ export class GameManager {
       }
 
       if (message.type === MOVE) {
+        console.log("Inside Move");
         const game = this.games.find(
-          (game) => game.player1 || game.player2 === socket
+          (game) => game.player1 === socket || game.player2 === socket
         );
         if (game) {
+          console.log("Inside Makemove");
           game.makeMove(socket, message.move);
         }
       }

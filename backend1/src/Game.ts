@@ -7,6 +7,7 @@ export class Game {
   public player2: WebSocket;
   public board: Chess;
   private startTime: Date;
+  private moveCount = 0;
 
   constructor(player1: WebSocket, player2: WebSocket) {
     this.player1 = player1;
@@ -45,26 +46,30 @@ export class Game {
       // Validate the type of move using Zod
       // Validation here 1. Is this users move 2. Is the move valid
 
-      if (this.board.move.length % 2 === 0 && socket !== this.player1) {
+      if (this.moveCount % 2 === 0 && socket !== this.player1) {
         return;
       }
 
-      if (this.board.move.length % 2 === 1 && socket !== this.player2) {
+      if (this.moveCount % 2 === 1 && socket !== this.player2) {
         return;
       }
+      console.log("Did not early return");
+
       try {
         // If yes, update the board, push the move
         // Check if the game is over
         // Gets handled by the chess.js library
         this.board.move(move);
-      } catch (error) {
-        throw new Error("Invalid Move");
+      } catch (error: any) {
+        console.log("error", error);
         return;
       }
 
+      console.log("Move succeeded");
+
       if (this.board.isGameOver()) {
         // Send the updated board to both the players
-        this.player1.emit(
+        this.player1.send(
           JSON.stringify({
             type: GAME_OVER,
             payload: {
@@ -72,7 +77,7 @@ export class Game {
             },
           })
         );
-        this.player2.emit(
+        this.player2.send(
           JSON.stringify({
             type: GAME_OVER,
             payload: {
@@ -99,6 +104,8 @@ export class Game {
           })
         );
       }
+
+      this.moveCount++;
     }
   }
 }
