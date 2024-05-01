@@ -12,6 +12,7 @@ export const Game = () => {
   const socket = useSocket();
   const [chess, setChess] = useState(new Chess());
   const [board, setBoard] = useState(chess.board());
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (!socket) {
@@ -23,8 +24,8 @@ export const Game = () => {
       console.log(message);
       switch (message.type) {
         case INIT_GAME:
-          setChess(new Chess());
           setBoard(chess.board());
+          setStarted(true);
           console.log("Game initialized");
           break;
         case MOVE:
@@ -58,19 +59,21 @@ export const Game = () => {
           </div>
           <div className="col-span-2 w-full justify-center bg-slate-300 rounded-lg">
             <div className="pt-8 px-24">
-              <button
-                className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 pr-11 rounded-lg"
-                onClick={() => {
-                  console.log("Button vai");
-                  socket?.send(
-                    JSON.stringify({
-                      type: INIT_GAME,
-                    })
-                  );
-                }}
-              >
-                Play &rarr;
-              </button>
+              {!started && (
+                <button
+                  className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 pr-11 rounded-lg"
+                  onClick={() => {
+                    console.log("Button vai");
+                    socket?.send(
+                      JSON.stringify({
+                        type: INIT_GAME,
+                      })
+                    );
+                  }}
+                >
+                  Play &rarr;
+                </button>
+              )}
               <button
                 className="mt-2 bg-black text-white font-bold py-3 pl-5 pr-9 rounded-lg"
                 onClick={() => {

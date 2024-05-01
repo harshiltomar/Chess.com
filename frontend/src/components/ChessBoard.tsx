@@ -62,12 +62,21 @@ export const ChessBoard = ({
                   }}
                   key={j}
                   className={`w-20 h-20 ${
-                    (i + j) % 2 === 0 ? "bg-blue-500" : "bg-blue-100"
+                    (i + j) % 2 === 0 ? "bg-black" : "bg-blue-100"
                   }`}
                 >
                   <div className="w-full flex justify-center h-full">
                     <div className="h-full flex flex-col justify-center">
-                      {square ? square.type : ""}
+                      {square ? (
+                        <img
+                          className="w-12"
+                          src={`/${
+                            square?.color === "b"
+                              ? square?.type
+                              : `${square?.type?.toUpperCase()} copy`
+                          }.png`}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>
