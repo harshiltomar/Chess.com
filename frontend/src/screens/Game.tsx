@@ -49,13 +49,19 @@ export const Game = () => {
       <div className="pt-8 max-w-screen-lg w-full">
         <div className="grid grid-cols-6 gap-4 w-full">
           <div className="col-span-4 w-full flex justify-center">
-            <ChessBoard socket={socket as WebSocket} board={board} />
+            <ChessBoard
+              chess={chess}
+              setBoard={setBoard}
+              socket={socket as WebSocket}
+              board={board}
+            />
           </div>
           <div className="col-span-2 w-full justify-center bg-slate-300 rounded-lg">
             <div className="pt-8 px-24">
               <button
                 className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 pr-11 rounded-lg"
                 onClick={() => {
+                  console.log("Button vai");
                   socket?.send(
                     JSON.stringify({
                       type: INIT_GAME,
@@ -85,4 +91,4 @@ export const Game = () => {
   );
 };
 
-//1.34.18
+//1.57.10

@@ -46,11 +46,9 @@ export class GameManager {
         );
         if (game) {
           console.log("Inside Makemove");
-          game.makeMove(socket, message.move);
+          game.makeMove(socket, message.payload.move);
         }
       }
     });
   }
 }
-
-// 31.21

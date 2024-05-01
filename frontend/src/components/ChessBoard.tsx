@@ -1,16 +1,21 @@
 import { Color, PieceSymbol, Square } from "chess.js";
 import { useState } from "react";
+import { MOVE } from "../screens/Game";
 
 export const ChessBoard = ({
+  chess,
   board,
   socket,
+  setBoard,
 }: {
+  chess: any;
   board: ({
     square: Square;
     type: PieceSymbol;
     color: Color;
   } | null)[][];
   socket: WebSocket;
+  setBoard: any;
 }) => {
   const [from, setFrom] = useState<Square | null>(null);
   const [to, setTo] = useState<Square | null>(null);
@@ -21,23 +26,38 @@ export const ChessBoard = ({
       {board.map((row, i) => {
         return (
           <div key={i} className="flex">
-            {row.map((sqaure, j) => {
+            {row.map((square, j) => {
+              const squareRepresentation = (String.fromCharCode(65 + (j % 8)) +
+                "" +
+                (8 - i)) as Square;
+              console.log("squareRepresentation", squareRepresentation);
               return (
                 <div
                   onClick={() => {
                     if (!from) {
-                      setFrom(sqaure?.square ?? null);
+                      setFrom(squareRepresentation);
                     } else {
-                      setTo(sqaure?.square ?? null);
+                      // setTo(square?.square ?? null);
                       socket.send(
                         JSON.stringify({
-                          type: "move",
+                          type: MOVE,
                           payload: {
-                            from,
-                            to,
+                            move: {
+                              from,
+                              to: squareRepresentation,
+                            },
                           },
                         })
                       );
+                      setFrom(null);
+                      chess.move({
+                        from,
+                        to: squareRepresentation,
+                      });
+                      console.log({
+                        from,
+                        to: squareRepresentation,
+                      });
                     }
                   }}
                   key={j}
@@ -47,7 +67,7 @@ export const ChessBoard = ({
                 >
                   <div className="w-full flex justify-center h-full">
                     <div className="h-full flex flex-col justify-center">
-                      {sqaure ? sqaure.type : ""}
+                      {square ? square.type : ""}
                     </div>
                   </div>
                 </div>

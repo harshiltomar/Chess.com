@@ -42,6 +42,7 @@ export class Game {
       to: string;
     }
   ) {
+    console.log(move);
     if (socket === this.player1 || socket === this.player2) {
       // Validate the type of move using Zod
       // Validation here 1. Is this users move 2. Is the move valid
