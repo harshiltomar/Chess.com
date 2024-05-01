@@ -67,6 +67,7 @@ export class Game {
       }
 
       console.log("Move succeeded");
+      // Potential TODO: await and push the moves to the db
 
       if (this.board.isGameOver()) {
         // Send the updated board to both the players

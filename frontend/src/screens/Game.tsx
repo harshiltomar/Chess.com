@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ChessBoard } from "../components/ChessBoard";
 import { useSocket } from "../hooks/useSocket";
 import { Chess } from "chess.js";
+import { Link } from "react-router-dom";
 
 // TODO: move together, there is code repition here
 export const INIT_GAME = "init_game";
@@ -74,18 +75,20 @@ export const Game = () => {
                   Play &rarr;
                 </button>
               )}
-              <button
-                className="mt-2 bg-black text-white font-bold py-3 pl-5 pr-9 rounded-lg"
-                onClick={() => {
-                  socket?.send(
-                    JSON.stringify({
-                      type: INIT_GAME,
-                    })
-                  );
-                }}
-              >
-                Go back
-              </button>
+              <Link to="/">
+                <button
+                  className="mt-2 bg-black text-white font-bold py-3 pl-5 pr-9 rounded-lg"
+                  onClick={() => {
+                    socket?.send(
+                      JSON.stringify({
+                        type: INIT_GAME,
+                      })
+                    );
+                  }}
+                >
+                  Go back
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -93,5 +96,3 @@ export const Game = () => {
     </div>
   );
 };
-
-//1.57.10
