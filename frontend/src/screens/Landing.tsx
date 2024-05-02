@@ -27,7 +27,7 @@ export const Landing = () => {
               <p className="mx-2">14,433,528 Games Today</p>
               <p className="ml-4">105,612 playing now</p>
             </div>
-            <Link to="/game">
+            <Link to="/new">
               <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 pr-11 rounded-lg">
                 Play Online &rarr;
               </button>
